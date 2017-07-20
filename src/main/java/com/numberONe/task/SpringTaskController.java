@@ -1,20 +1,18 @@
 package com.numberONe.task;
 
-import java.util.Properties;
-
-import javax.inject.Inject;
-
-import org.hyperic.sigar.Sigar;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-
 import com.numberONe.entity.ServerInfoFormMap;
 import com.numberONe.mapper.ServerInfoMapper;
 import com.numberONe.util.Common;
 import com.numberONe.util.EmailUtils;
 import com.numberONe.util.PropertiesUtils;
 import com.numberONe.util.SystemInfo;
+import org.hyperic.sigar.Sigar;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.util.Properties;
 
 /**
  * Spring调度，指定时间执行
@@ -43,7 +41,7 @@ public class SpringTaskController {
 	 * 
 	 * @throws Exception
 	 */
-	@Scheduled(cron = "1 * *  * * ? ")
+	@Scheduled(cron = "1 * *  * * ? ")//0/10 从0秒开始 每10秒
 	public void task() throws Exception {
 		ServerInfoFormMap usage = SystemInfo.usage(new Sigar());
 		String cpuUsage = usage.get("cpuUsage")+"";// CPU使用率
